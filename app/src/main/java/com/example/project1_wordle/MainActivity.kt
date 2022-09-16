@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity() {
         val guessField = findViewById<EditText>(R.id.GuessField)
         val inputButton = findViewById<Button>(R.id.InputButton)
         val resetButton = findViewById<Button>(R.id.resetButton)
+        val winStreak = findViewById<TextView>(R.id.WinStreak)
+        var winNum = 0
         var guessNum = 0
         var ranWord = FourLetterWordList.getRandomFourLetterWord()
         correctGuess.text = ranWord
@@ -177,6 +179,9 @@ class MainActivity : AppCompatActivity() {
                     checkStringGen(answer1Check, guess, check)
                     answer1Check.visibility = View.VISIBLE
                     if (guess == ranWord) {
+                        winNum +=1
+                        winStreak.text = winNum.toString()
+                        correctGuess.setTextColor(Color.GREEN)
                         inputToReset()
                     } else {
                         guess2.visibility = View.VISIBLE
@@ -190,6 +195,9 @@ class MainActivity : AppCompatActivity() {
                     checkStringGen(answer2Check, guess, check)
                     answer2Check.visibility = View.VISIBLE
                     if (guess == ranWord) {
+                        winNum +=1
+                        winStreak.text = winNum.toString()
+                        correctGuess.setTextColor(Color.GREEN)
                         inputToReset()
                     } else {
                         guess3.visibility = View.VISIBLE
@@ -203,6 +211,15 @@ class MainActivity : AppCompatActivity() {
                     checkStringGen(answer3Check, guess, check)
                     answer3Check.visibility = View.VISIBLE
                     answer2.visibility = View.VISIBLE
+                    if (guess == ranWord) {
+                        winNum +=1
+                        winStreak.text = winNum.toString()
+                        correctGuess.setTextColor(Color.GREEN)
+                    } else {
+                        winNum = 0
+                        winStreak.text = winNum.toString()
+                        correctGuess.setTextColor(Color.RED)
+                    }
                     inputToReset()
                 }
             }
